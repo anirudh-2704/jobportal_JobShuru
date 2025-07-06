@@ -14,14 +14,16 @@ import { setSearchedQuery } from "@/redux/jobSlice";
 const category = [
   "Frontend Developer",
   "Backend Developer",
-  "Data Science",
-  "Graphic Designer",
-  "Full Stack Developer",
+  "FullStack Developer",
   "Data Science",
   "Data Analyst",
+  "Graphic Designer",
   "Software Developer",
   "Research Engineer",
   "Software Engineer",
+  "Product Developer",
+  "Marketing Manager",
+  "Cloud Engineer",
 ];
 
 const CategoryCarousel = () => {

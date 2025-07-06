@@ -1,6 +1,6 @@
 import { Job } from "../models/job.model.js";
 
-// admin post krega job
+// admin job na post madthane 
 export const postJob = async (req, res) => {
     try {
         const { title, description, requirements, salary, location, jobType, experience, position, companyId } = req.body;
@@ -100,3 +100,62 @@ export const getAdminJobs = async (req, res) => {
         console.log(error);
     }
 }
+
+// PUT /api/v1/job/update/:id
+//title, description, requirements, salary, location, jobType, experience, position, companyId
+
+export const updateJob = async (req, res) => {
+  try {
+    const {
+      title,
+      location,
+      salary,
+      openings,
+      description,
+      requirements,
+      experienceLevel,
+      jobType,
+      position,
+      company,
+    } = req.body;
+
+    // Prepare updateData object only with fields that are present
+    const updateData = {};
+    if (title) updateData.title = title;
+    if (location) updateData.location = location;
+    if (salary) updateData.salary = salary;
+    if (openings) updateData.openings = openings;
+    if (description) updateData.description = description;
+    if (requirements) {
+      updateData.requirements = Array.isArray(requirements)
+        ? requirements
+        : requirements.split(",").map((item) => item.trim());
+    }
+    if (experienceLevel) updateData.experienceLevel = experienceLevel;
+    if (jobType) updateData.jobType = jobType;
+    if (position) updateData.position = position;
+    if (company) updateData.company = company;
+
+    const job = await Job.findByIdAndUpdate(req.params.id, updateData, {
+      new: true,
+    });
+
+    if (!job) {
+      return res.status(404).json({
+        message: "Job not found",
+        success: false,
+      });
+    }
+
+    return res.status(200).json({
+      message: "Job updated successfully.",
+      success: true,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Something went wrong while updating the job.",
+      success: false,
+    });
+  }
+};
