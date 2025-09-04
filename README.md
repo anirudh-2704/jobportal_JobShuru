@@ -84,5 +84,5 @@ JobShuru is a full-stack job portal that allows job seekers to apply for jobs, r
 
 ## Deployement
 
- Deployed on Vercel.
+ Deployed on Render.
  View Website @ https://jobportal-jobshuru.onrender.com
